@@ -13,6 +13,9 @@ MANDIR ?=       ${PREFIX}/share/man
 SRCS =          src/imsg.c src/imsg-buffer.c
 OBJS =          ${SRCS:.c=.o}
 
+TESTSRCS =      test/imsg_sendrcv.c
+TESTOBJS =      ${TESTSRCS:.c=.test}
+
 all: ${LIBRARY} ${STATICLIB}
 
 ${LIBRARY}: ${OBJS}
@@ -32,10 +35,15 @@ install: all
 	ln -sf ${LIBRARY} ${DESTDIR}/${SONAME}
 	install -t ${DESTDIR}${LIBDIR} ${STATICLIB}
 
+check: test
+
+test: all ${TESTOBJS}
+
+${TESTOBJS}: ${TESTSRCS}
+	${CC} ${CFLAGS} -Isrc -static $< -o $@ -L. -limsg
+	./$@
+
 clean:
-	rm -f ${LIBRARY} ${STATICLIB} ${OBJS}
+	rm -f ${LIBRARY} ${STATICLIB} ${OBJS} ${TESTOBJS}
 
-test: all
-	@echo "TODO: no regression tests defined yet"
-
-.PHONY: all clean install test
+.PHONY: all check clean install test
