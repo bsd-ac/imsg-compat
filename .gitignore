@@ -1,6 +1,9 @@
 # libraries
 libimsg.so.*
 
+# all test files
+*.test
+
 # Prerequisites
 *.d
 
