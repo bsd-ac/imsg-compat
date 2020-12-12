@@ -1,6 +1,6 @@
 # OpenBSD IMSG
 
-This is an unofficial port of OpenBSD's imsg[1] interface to linux.
+This is an unofficial port of OpenBSD's imsg interface to linux.
 
 ## Installation
 
@@ -29,4 +29,4 @@ team and of course OpenBSD for creating it.
 
 ## References
 
-[1] https://man.openbsd.org/imsg_init.3
+- https://man.openbsd.org/imsg_init.3
