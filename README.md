@@ -1,4 +1,5 @@
 # OpenBSD IMSG
+[![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/bsd-ac/imsg-compat?include_prereleases)](https://github.com/bsd-ac/imsg-compat/releases) [![GitHub license](https://img.shields.io/github/license/bsd-ac/imsg-compat.svg)](https://github.com/bsd-ac/imsg-compat/blob/master/LICENSE) [![GitHub issues](https://img.shields.io/github/issues-raw/bsd-ac/imsg-compat)](https://github.com/bsd-ac/imsg-compat/issues) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/bsd-ac/imsg-compat/issues)
 
 This is an unofficial port of OpenBSD's imsg interface to linux.
 
