@@ -16,6 +16,11 @@ man imsg_init
 
 PS: This port requires *<sys/queue.h>*
 
+## Usage
+
+This port creates both a shared library `libimsg.so` and a static library
+`libimsg.a`. To use them, just link with `-limsg`.
+
 ## Modifications
 
 This port is as faithful as possible to the OpenBSD implementation.<br>

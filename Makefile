@@ -19,7 +19,7 @@ TESTOBJS =      ${TESTSRCS:.c=.test}
 all: ${LIBRARY} ${STATICLIB}
 
 ${LIBRARY}: ${OBJS}
-	${CC} -shared -o ${LIBRARY} ${OBJS} -Wl,--soname,${SONAME}
+	${CC} -shared -o ${LIBRARY} ${OBJS} -Wl,--soname,${SONAME} ${LDFLAGS}
 
 ${STATICLIB}: ${OBJS}
 	${AR} rcs ${STATICLIB} ${OBJS}
