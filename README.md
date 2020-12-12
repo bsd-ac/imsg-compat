@@ -16,6 +16,12 @@ man imsg_init
 
 PS: This port requires *<sys/queue.h>*
 
+## Modifications
+
+This port is as faithful as possible to the OpenBSD implementation.<br>
+The only addition is the [src/_imsg_compat.h](src/imsg_compat.h) header
+file which defines static standalone implementations of compat functions.
+
 ## Credits
 
 The port has been made possible due to the excellent works of the tmux
