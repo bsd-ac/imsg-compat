@@ -9,6 +9,7 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-9
+            - glibc-2.28
       env:
          - MATRIX_EVAL="CC=gcc-9"
 
@@ -19,6 +20,7 @@ matrix:
             - llvm-toolchain-trusty-10.0
           packages:
             - clang-10.0
+            - glibc-2.28
       env:
         - MATRIX_EVAL="CC=clang-10.0"
 
