@@ -1,5 +1,6 @@
 ---
 dist: focal
+language: c
 env:
   - CC=gcc-9
   - CC=clang-7
