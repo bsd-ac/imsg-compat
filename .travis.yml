@@ -1,8 +1,7 @@
 ---
 dist: focal
 env:
-  global:
-    - CC=gcc-9
-    - CC=clang-10
+  - CC=gcc-9
+  - CC=clang-7
 script:
   - make check
