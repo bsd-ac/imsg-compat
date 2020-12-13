@@ -35,42 +35,40 @@ enum imsg_type { IMSG_A_MESSAGE, IMSG_MESSAGE2 };
 
 #define DATA_VALUE 42
 
-int
-dispatch_imsg(struct imsgbuf *ibuf)
-{
-	struct imsg	imsg;
-	ssize_t         n, datalen;
-	int		idata;
+int dispatch_imsg(struct imsgbuf *ibuf) {
+  struct imsg imsg;
+  ssize_t n, datalen;
+  int idata;
 
-	if (((n = imsg_read(ibuf)) == -1 && errno != EAGAIN) || n == 0) {
+  if (((n = imsg_read(ibuf)) == -1 && errno != EAGAIN) || n == 0) {
     return -1;
-	}
+  }
 
-	for (;;) {
-		if ((n = imsg_get(ibuf, &imsg)) == -1) {
-			return -1;
-		}
-		if (n == 0)	/* no more messages */
-			return -1;
-		datalen = imsg.hdr.len - IMSG_HEADER_SIZE;
+  for (;;) {
+    if ((n = imsg_get(ibuf, &imsg)) == -1) {
+      return -1;
+    }
+    if (n == 0) /* no more messages */
+      return -1;
+    datalen = imsg.hdr.len - IMSG_HEADER_SIZE;
 
-		switch (imsg.hdr.type) {
-		case IMSG_A_MESSAGE:
-			if (datalen < sizeof idata) {
-				return -1;
-			}
-			memcpy(&idata, imsg.data, sizeof idata);
-			/* handle message received */
-			if (idata == DATA_VALUE)
-				return 0;
-			else
-				return -1;
-			break;
-		}
+    switch (imsg.hdr.type) {
+    case IMSG_A_MESSAGE:
+      if (datalen < sizeof idata) {
+        return -1;
+      }
+      memcpy(&idata, imsg.data, sizeof idata);
+      /* handle message received */
+      if (idata == DATA_VALUE)
+        return 0;
+      else
+        return -1;
+      break;
+    }
 
-		imsg_free(&imsg);
-	}
-	return -1;
+    imsg_free(&imsg);
+  }
+  return -1;
 }
 
 int child_main(struct imsgbuf *ibuf) {
