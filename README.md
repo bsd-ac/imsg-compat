@@ -6,6 +6,14 @@ This is an unofficial port of OpenBSD's imsg interface to linux.
 
 [![Packaging status](https://repology.org/badge/vertical-allrepos/imsg-compat.svg)](https://repology.org/project/imsg-compat/versions)
 
+## Description
+
+The **imsg** functions provide a simple mechanism for communication
+between local processes using sockets. Each transmitted message is
+guaranteed to be presented to the receiving program whole.<br>
+They are commonly used in privilege separated processes, where
+processes with different rights are required to cooperate.
+
 ## Installation
 
 The port has been tested to compile and install with GCC 9.3.0 and
