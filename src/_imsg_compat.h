@@ -26,6 +26,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#ifndef HAVE_GETDTABLECOUNT
 #ifdef HAVE_PROC_PID
 static int
 getdtablecount(void)
@@ -47,7 +48,8 @@ getdtablecount(void)
 {
 	return (0);
 }
-#endif
+#endif // HAVE_PROC_PID
+#endif // HAVE_GETDTABLECOUNT
 
 #ifndef HAVE_FREEZERO
 static void
@@ -58,7 +60,7 @@ freezero(void *ptr, size_t size)
 		free(ptr);
 	}
 }
-#endif
+#endif // HAVE_FREEZERO
 
 /*	$OpenBSD: recallocarray.c,v 1.1 2017/03/06 18:44:21 otto Exp $	*/
 /*
@@ -77,6 +79,7 @@ freezero(void *ptr, size_t size)
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#ifndef HAVE_RECALLOCARRAY
 /*
  * This is sqrt(SIZE_MAX+1), as s1*s2 <= SIZE_MAX
  * if both s1 < MUL_NO_OVERFLOW and s2 < MUL_NO_OVERFLOW
@@ -134,5 +137,6 @@ recallocarray(void *ptr, size_t oldnmemb, size_t newnmemb, size_t size)
 
 	return newptr;
 }
+#endif // HAVE_RECALLOCARRAY
 
 #endif // IMSG_COMPAT_H
