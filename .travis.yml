@@ -1,31 +1,8 @@
 ---
-matrix:
-  include:
-    # works on Precise and Trusty
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-9
-            - libc6
-      env:
-         - MATRIX_EVAL="CC=gcc-9"
-
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty-10.0
-          packages:
-            - clang-10.0
-            - libc6
-      env:
-        - MATRIX_EVAL="CC=clang-10.0"
-
-before_install:
-    - eval "${MATRIX_EVAL}"
-
+dist: focal
+env:
+  global:
+    - CC=gcc-9
+    - CC=clang-10
 script:
   - make check
