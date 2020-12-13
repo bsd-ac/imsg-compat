@@ -15,7 +15,8 @@ make install
 man imsg_init
 ```
 
-PS: This port requires *<sys/queue.h>*
+PS: This port requires *<sys/queue.h>* and if using glibc, then >=2.25.0,
+for the `explicit_bzero` function.
 
 ## Usage
 
