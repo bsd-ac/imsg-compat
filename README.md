@@ -4,6 +4,8 @@
 
 This is an unofficial port of OpenBSD's imsg interface to linux.
 
+[![Packaging status](https://repology.org/badge/vertical-allrepos/imsg-compat.svg)](https://repology.org/project/imsg-compat/versions)
+
 ## Installation
 
 The port has been tested to compile and install with GCC 9.3.0 and
