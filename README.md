@@ -17,7 +17,7 @@ processes with different rights are required to cooperate.
 ## Installation
 
 The port has been tested to compile and install with GCC 9.3.0 and
-Clang 11.0.0, with both GNU Make and BSD Make.
+Clang 11.0.0, with GNU Make.
 
 ```
 make
