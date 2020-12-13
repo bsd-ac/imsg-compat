@@ -32,7 +32,7 @@ install: all
 	install -t ${DESTDIR}${MANDIR}/man3 man/imsg_init.3
 	install -t ${DESTDIR}${INCLUDEDIR} src/imsg.h
 	install -t ${DESTDIR}${LIBDIR} ${LIBRARY}
-	ln -sf ${LIBRARY} ${DESTDIR}/${SONAME}
+	ln -sf ${LIBRARY} ${DESTDIR}${LIBDIR}/${SONAME}
 	install -t ${DESTDIR}${LIBDIR} ${STATICLIB}
 
 check: test
