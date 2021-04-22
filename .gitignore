@@ -1,6 +1,9 @@
 # libraries
 libimsg.so.*
 
+# pkgconfig files
+libimsg.pc
+
 # all test files
 *.test
 
