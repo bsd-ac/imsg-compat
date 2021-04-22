@@ -1,0 +1,11 @@
+prefix=@PREFIX@
+libdir=${prefix}/@LIBDIR@
+includedir=${prefix}/include
+
+Name: IMSG
+Version: 9999
+Description: Unofficial OpenBSD imsg port
+URL: https://github.com/bsd-ac/imsg-compat
+
+Cflags: -I${includedir}
+Libs: -L${libdir} -limsg
