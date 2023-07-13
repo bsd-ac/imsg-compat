@@ -1,14 +1,14 @@
-VERSION ?=      6.8.2
+VERSION =       6.8.2
 
-STATICLIB ?=    libimsg.a
-SONAME ?=       libimsg.so
-LIBRARY ?=      libimsg.so.${VERSION}
+STATICLIB =     libimsg.a
+SONAME =        libimsg.so
+LIBRARY =       libimsg.so.${VERSION}
 
-DESTDIR ?=
-PREFIX ?=       /usr
-INCLUDEDIR ?=   ${PREFIX}/include
-LIBDIR ?=       ${PREFIX}/lib
-MANDIR ?=       ${PREFIX}/share/man
+DESTDIR =
+PREFIX =        /usr
+INCLUDEDIR =    ${PREFIX}/include
+LIBDIR =        ${PREFIX}/lib
+MANDIR =        ${PREFIX}/share/man
 
 SRCS =          src/imsg.c src/imsg-buffer.c
 OBJS =          ${SRCS:.c=.o}
