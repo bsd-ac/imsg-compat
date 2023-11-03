@@ -1,4 +1,4 @@
-VERSION =       6.8.2
+VERSION =       7.4.0
 
 STATICLIB =     libimsg.a
 SONAME =        libimsg.so
