@@ -3,7 +3,7 @@ libdir=${prefix}/@LIBDIR@
 includedir=${prefix}/include
 
 Name: IMSG
-Version: 9999
+Version: @VERSION@
 Description: Unofficial OpenBSD imsg port
 URL: https://github.com/bsd-ac/imsg-compat
 
