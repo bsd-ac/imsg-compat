@@ -4,6 +4,9 @@ STATICLIB =     libimsg.a
 SONAME =        libimsg.so
 LIBRARY =       libimsg.so.${VERSION}
 
+INSTALL_LIB =   install -m0755
+INSTALL_DATA =  install -m0644
+
 DESTDIR =
 PREFIX =        /usr
 INCLUDEDIR =    ${PREFIX}/include
@@ -35,12 +38,14 @@ libimsg.pc: libimsg.pc.in
 
 install: all
 	mkdir -p ${DESTDIR}${MANDIR}/man3 ${DESTDIR}${INCLUDEDIR} ${DESTDIR}${LIBDIR}/pkgconfig
-	install -t ${DESTDIR}${MANDIR}/man3 man/imsg_init.3
-	install -t ${DESTDIR}${INCLUDEDIR} src/imsg.h
-	install -t ${DESTDIR}${LIBDIR} ${LIBRARY}
+
+	${INSTALL_DATA} -t ${DESTDIR}${MANDIR}/man3 man/imsg_init.3
+	${INSTALL_DATA} -t ${DESTDIR}${INCLUDEDIR} src/imsg.h
+	${INSTALL_DATA} -t ${DESTDIR}${LIBDIR}/pkgconfig libimsg.pc
+
+	${INSTALL_LIB} -t ${DESTDIR}${LIBDIR} ${STATICLIB}
+	${INSTALL_LIB} -t ${DESTDIR}${LIBDIR} ${LIBRARY}
 	ln -sf ${LIBRARY} ${DESTDIR}${LIBDIR}/${SONAME}
-	install -t ${DESTDIR}${LIBDIR} ${STATICLIB}
-	install -t ${DESTDIR}${LIBDIR}/pkgconfig libimsg.pc
 
 check: test
 
