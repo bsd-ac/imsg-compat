@@ -47,8 +47,8 @@ check: test
 test: all ${TESTOBJS}
 
 ${TESTOBJS}: ${TESTSRCS}
-	${CC} ${CFLAGS} -Isrc ${TESTSRCS} -o $@ -L. -limsg
-	env -i LD_LIBRARY_PATH=. ./$@
+	${CC} ${CFLAGS} -Isrc ${TESTSRCS} ${STATICLIB} -o $@
+	./$@
 
 clean:
 	rm -f ${LIBRARY} ${STATICLIB} ${OBJS} ${TESTOBJS} libimsg.pc
