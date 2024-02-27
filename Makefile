@@ -47,7 +47,7 @@ check: test
 test: all ${TESTOBJS}
 
 ${TESTOBJS}: ${TESTSRCS}
-	${CC} ${CFLAGS} -Isrc $< -o $@ -L. -limsg
+	${CC} ${CFLAGS} -Isrc ${TESTSRCS} -o $@ -L. -limsg
 	env -i LD_LIBRARY_PATH=. ./$@
 
 clean:
