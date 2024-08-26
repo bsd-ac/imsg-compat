@@ -9,15 +9,29 @@ project('imsg-compat', 'c',
 compiler = meson.get_compiler('c')
 
 have_getdtablecount = compiler.has_function('getdtablecount')
+if have_getdtablecount
+	add_project_arguments('-DHAVE_GETDTABLECOUNT', language: 'c')
+endif
+
 have_recallocarray = compiler.has_function('recallocarray')
+if have_recallocarray
+	add_project_arguments('-DHAVE_RECALLOCARRAY', language: 'c')
+endif
+
+have_freezero = compiler.has_function('freezero')
+if have_freezero
+	add_project_arguments('-DHAVE_FREEZERO', language: 'c')
+endif
 
 proc_environ = run_command('/bin/sh', '-c', 'cat /proc/self/environ', check: false)
 have_proc_pid = proc_environ.returncode() == 0
-
 message(
 	'Checking for /proc mount:',
 	have_proc_pid ? 'yes' : 'no',
 )
+if have_proc_pid
+	add_project_arguments('-DHAVE_PROC_PID', language: 'c')
+endif
 
 incdir = 'src'
 srcdir = 'src'
