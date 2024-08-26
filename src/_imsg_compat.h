@@ -139,4 +139,11 @@ recallocarray(void *ptr, size_t oldnmemb, size_t newnmemb, size_t size)
 }
 #endif // HAVE_RECALLOCARRAY
 
+#include <bits/uio_lim.h>
+#ifdef __IOV_MAX
+# define IOV_MAX __IOV_MAX
+#else
+# undef IOV_MAX
+#endif
+
 #endif // IMSG_COMPAT_H
