@@ -84,7 +84,7 @@ int child_main(struct imsgbuf *ibuf) {
 
 int parent_main(struct imsgbuf *ibuf) { return dispatch_imsg(ibuf); }
 
-int main() {
+int main(void) {
   struct imsgbuf parent_ibuf, child_ibuf;
   int imsg_fds[2];
 
