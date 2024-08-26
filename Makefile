@@ -16,7 +16,7 @@ MANDIR =        ${PREFIX}/share/man
 SRCS =          src/imsg.c src/imsg-buffer.c
 OBJS =          ${SRCS:.c=.o}
 
-TESTSRCS =      test/imsg_sendrcv.c
+TESTSRCS =      imsg_sendrcv ibuf_test
 TESTOBJS =      ${TESTSRCS:.c=.test}
 
 all: ${LIBRARY} ${STATICLIB} libimsg.pc
@@ -52,7 +52,7 @@ check: test
 test: all ${TESTOBJS}
 
 ${TESTOBJS}: ${TESTSRCS}
-	${CC} ${CFLAGS} -Isrc ${TESTSRCS} ${STATICLIB} -o $@
+	${CC} ${CFLAGS} -Isrc test/$@.c ${STATICLIB} -o $@
 	./$@
 
 clean:
