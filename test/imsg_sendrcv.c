@@ -105,4 +105,6 @@ int main() {
   close(imsg_fds[1]);
   imsg_init(&parent_ibuf, imsg_fds[0]);
   exit(parent_main(&parent_ibuf));
+
+  return 0; // never reached
 }
