@@ -24,6 +24,11 @@ if have_freezero
 	add_project_arguments('-DHAVE_FREEZERO', language: 'c')
 endif
 
+have_bits_uio_lim_h = compiler.has_header('bits/uio_lim.h')
+if have_bits_uio_lim_h
+	add_project_arguments('-DHAVE_BITS_UIO_LIM_H', language: 'c')
+endif
+
 proc_environ = run_command('/bin/sh', '-c', 'cat /proc/self/environ', check: false)
 have_proc_pid = proc_environ.returncode() == 0
 message(
