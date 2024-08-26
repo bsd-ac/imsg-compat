@@ -29,8 +29,12 @@ if have_bits_uio_lim_h
 	add_project_arguments('-DHAVE_BITS_UIO_LIM_H', language: 'c')
 endif
 
-proc_environ = run_command('/bin/sh', '-c', 'cat /proc/self/environ', check: false)
-have_proc_pid = proc_environ.returncode() == 0
+have_proc_pid = false
+sh = find_program('sh')
+if sh.found()
+	proc_environ = run_command(sh, '-c', 'cat /proc/self/environ', check: false)
+	have_proc_pid = proc_environ.returncode() == 0
+endif
 message(
 	'Checking for /proc mount:',
 	have_proc_pid ? 'YES' : 'NO',
