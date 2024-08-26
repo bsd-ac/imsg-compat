@@ -37,7 +37,8 @@ enum imsg_type { IMSG_A_MESSAGE, IMSG_MESSAGE2 };
 
 int dispatch_imsg(struct imsgbuf *ibuf) {
   struct imsg imsg;
-  ssize_t n, datalen;
+  ssize_t n;
+  uint16_t datalen;
   int idata;
 
   if (((n = imsg_read(ibuf)) == -1 && errno != EAGAIN) || n == 0) {
