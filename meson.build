@@ -7,6 +7,7 @@ project('imsg-compat', 'c',
 )
 
 compiler = meson.get_compiler('c')
+add_project_arguments('-Wno-unused-function', language: 'c')
 
 have_getdtablecount = compiler.has_function('getdtablecount')
 if have_getdtablecount
@@ -27,7 +28,7 @@ proc_environ = run_command('/bin/sh', '-c', 'cat /proc/self/environ', check: fal
 have_proc_pid = proc_environ.returncode() == 0
 message(
 	'Checking for /proc mount:',
-	have_proc_pid ? 'yes' : 'no',
+	have_proc_pid ? 'YES' : 'NO',
 )
 if have_proc_pid
 	add_project_arguments('-DHAVE_PROC_PID', language: 'c')
@@ -40,12 +41,23 @@ headers = [
 	srcdir + '/imsg.h',
 ]
 
+install_headers(headers)
+
+man_pages = [
+	'man/imsg_init.3',
+	'man/ibuf_add.3',
+]
+
+install_man(man_pages)
+
 sources = [
 	srcdir + '/imsg.c',
 	srcdir + '/imsg-buffer.c',
 ]
 
 libimsg = both_libraries('imsg', sources: sources, include_directories: incdir, install: true)
+pkgconfig = import('pkgconfig')
+pkgconfig.generate(libimsg, version: meson.project_version(), name: 'libimsg', description: 'imsg library', libraries: libimsg)
 
 tests = [
 	'test/ibuf_test.c',

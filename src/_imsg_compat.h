@@ -23,8 +23,13 @@
 #include <glob.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+
+#ifdef __linux__
+# include <linux/limits.h>
+#endif
 
 #ifndef HAVE_GETDTABLECOUNT
 #ifdef HAVE_PROC_PID
@@ -36,16 +41,20 @@ getdtablecount(void)
 	int	n = 0;
 
 	if (snprintf(path, sizeof path, "/proc/%ld/fd/*", (long)getpid()) < 0)
-		fatal("snprintf overflow");
+		goto error;
 	if (glob(path, 0, NULL, &g) == 0)
 		n = g.gl_pathc;
 	globfree(&g);
 	return (n);
+error:
+	errno = ENOMEM;
+	return 0;
 }
 #else
 static int
 getdtablecount(void)
 {
+	errno = ENOTSUP;
 	return (0);
 }
 #endif // HAVE_PROC_PID
