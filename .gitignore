@@ -1,3 +1,7 @@
+# tests
+ibuf_test
+imsg_sendrcv
+
 # libraries
 libimsg.so.*
 
