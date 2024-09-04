@@ -9,6 +9,11 @@ project('imsg-compat', 'c',
 compiler = meson.get_compiler('c')
 add_project_arguments('-Wno-unused-function', language: 'c')
 
+have_explicit_bzero = compiler.has_function('explicit_bzero')
+if have_explicit_bzero
+	add_project_arguments('-DHAVE_EXPLICIT_BZERO', language: 'c')
+endif
+
 have_getdtablecount = compiler.has_function('getdtablecount')
 if have_getdtablecount
 	add_project_arguments('-DHAVE_GETDTABLECOUNT', language: 'c')

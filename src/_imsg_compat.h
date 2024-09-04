@@ -31,6 +31,20 @@
 # include <linux/limits.h>
 #endif
 
+#ifndef HAVE_EXPLICIT_BZERO
+static void
+__explicit_bzero_hook(void *buf, size_t len)
+{
+}
+
+static void
+explicit_bzero(void *buf, size_t len)
+{
+	memset(buf, 0, len);
+	__explicit_bzero_hook(buf, len);
+}
+#endif // HAVE_EXPLICIT_BZERO
+
 #ifndef HAVE_GETDTABLECOUNT
 #ifdef HAVE_PROC_PID
 static int
