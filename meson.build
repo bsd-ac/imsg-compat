@@ -14,6 +14,11 @@ if have_endian_h
 	add_project_arguments('-DHAVE_ENDIAN_H', language: 'c')
 endif
 
+have_machine_endian_h = compiler.has_header('machine/endian.h')
+if have_machine_endian_h
+	add_project_arguments('-DHAVE_MACHINE_ENDIAN_H', language: 'c')
+endif
+
 have_explicit_bzero = compiler.has_function('explicit_bzero')
 if have_explicit_bzero
 	add_project_arguments('-DHAVE_EXPLICIT_BZERO', language: 'c')

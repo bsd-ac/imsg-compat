@@ -33,6 +33,10 @@
 #include <endian.h>
 #endif
 
+#ifdef HAVE_MACHINE_ENDIAN_H
+#include <machine/endian.h>
+#endif
+
 #include "_imsg_compat.h"
 #include "imsg.h"
 
