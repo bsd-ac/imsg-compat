@@ -9,6 +9,11 @@ project('imsg-compat', 'c',
 compiler = meson.get_compiler('c')
 add_project_arguments('-Wno-unused-function', language: 'c')
 
+have_endian_h = compiler.has_header('endian.h')
+if have_endian_h
+	add_project_arguments('-DHAVE_ENDIAN_H', language: 'c')
+endif
+
 have_explicit_bzero = compiler.has_function('explicit_bzero')
 if have_explicit_bzero
 	add_project_arguments('-DHAVE_EXPLICIT_BZERO', language: 'c')

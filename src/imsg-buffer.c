@@ -24,11 +24,14 @@
 
 #include <limits.h>
 #include <errno.h>
-#include <endian.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#ifdef HAVE_ENDIAN_H
+#include <endian.h>
+#endif
 
 #include "_imsg_compat.h"
 #include "imsg.h"
