@@ -66,7 +66,7 @@ sources = [
 
 libimsg = both_libraries('imsg', sources: sources, include_directories: incdir, install: true)
 pkgconfig = import('pkgconfig')
-pkgconfig.generate(libimsg, version: meson.project_version(), name: 'libimsg', description: 'imsg library', libraries: libimsg)
+pkgconfig.generate(libimsg, version: meson.project_version(), name: 'libimsg', description: 'Unofficial OpenBSD imsg port', libraries: libimsg)
 
 tests = [
 	'test/ibuf_test.c',
