@@ -1,5 +1,12 @@
+# tests
+ibuf_test
+imsg_sendrcv
+
 # libraries
 libimsg.so.*
+
+# vscode
+.vscode
 
 # pkgconfig files
 libimsg.pc

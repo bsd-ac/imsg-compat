@@ -23,8 +23,27 @@
 #include <glob.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+
+#ifdef __linux__
+# include <linux/limits.h>
+#endif
+
+#ifndef HAVE_EXPLICIT_BZERO
+static void
+__explicit_bzero_hook(void *buf, size_t len)
+{
+}
+
+static void
+explicit_bzero(void *buf, size_t len)
+{
+	memset(buf, 0, len);
+	__explicit_bzero_hook(buf, len);
+}
+#endif // HAVE_EXPLICIT_BZERO
 
 #ifndef HAVE_GETDTABLECOUNT
 #ifdef HAVE_PROC_PID
@@ -36,16 +55,20 @@ getdtablecount(void)
 	int	n = 0;
 
 	if (snprintf(path, sizeof path, "/proc/%ld/fd/*", (long)getpid()) < 0)
-		fatal("snprintf overflow");
+		goto error;
 	if (glob(path, 0, NULL, &g) == 0)
 		n = g.gl_pathc;
 	globfree(&g);
 	return (n);
+error:
+	errno = ENOMEM;
+	return 0;
 }
 #else
 static int
 getdtablecount(void)
 {
+	errno = ENOTSUP;
 	return (0);
 }
 #endif // HAVE_PROC_PID
@@ -138,5 +161,12 @@ recallocarray(void *ptr, size_t oldnmemb, size_t newnmemb, size_t size)
 	return newptr;
 }
 #endif // HAVE_RECALLOCARRAY
+
+#ifdef HAVE_BITS_UIO_LIM_H
+#include <bits/uio_lim.h>
+#ifdef __IOV_MAX
+# define IOV_MAX __IOV_MAX
+#endif // __IOV_MAX
+#endif // HAVE_BITS_UIO_LIM_H
 
 #endif // IMSG_COMPAT_H

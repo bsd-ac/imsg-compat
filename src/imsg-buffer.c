@@ -24,11 +24,27 @@
 
 #include <limits.h>
 #include <errno.h>
-#include <endian.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#ifdef HAVE_ENDIAN_H
+#include <endian.h>
+#else
+#undef htobe16
+#define htobe16 htons
+#undef htobe32
+#define htobe32 htonl
+#undef htobe64
+#define htobe64 htonll
+#undef be16toh
+#define be16toh ntohs
+#undef be32toh
+#define be32toh ntohl
+#undef be64toh
+#define be64toh ntohll
+#endif
 
 #include "_imsg_compat.h"
 #include "imsg.h"

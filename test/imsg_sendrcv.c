@@ -37,7 +37,8 @@ enum imsg_type { IMSG_A_MESSAGE, IMSG_MESSAGE2 };
 
 int dispatch_imsg(struct imsgbuf *ibuf) {
   struct imsg imsg;
-  ssize_t n, datalen;
+  ssize_t n;
+  uint16_t datalen;
   int idata;
 
   if (((n = imsg_read(ibuf)) == -1 && errno != EAGAIN) || n == 0) {
@@ -83,7 +84,7 @@ int child_main(struct imsgbuf *ibuf) {
 
 int parent_main(struct imsgbuf *ibuf) { return dispatch_imsg(ibuf); }
 
-int main() {
+int main(void) {
   struct imsgbuf parent_ibuf, child_ibuf;
   int imsg_fds[2];
 
@@ -104,4 +105,6 @@ int main() {
   close(imsg_fds[1]);
   imsg_init(&parent_ibuf, imsg_fds[0]);
   exit(parent_main(&parent_ibuf));
+
+  return 0; // never reached
 }
