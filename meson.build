@@ -3,7 +3,8 @@ project('imsg-compat', 'c',
 	license: 'ISC',
 	default_options: [
 		'warning_level=3',
-	]
+	],
+	meson_version: '>=1.1.0'
 )
 
 compiler = meson.get_compiler('c')
@@ -80,6 +81,14 @@ sources = [
 ]
 
 libimsg = both_libraries('imsg', sources: sources, include_directories: incdir, install: true)
+
+libimsg_dep = declare_dependency(
+	include_directories: include_directories(incdir),
+	objects: libimsg.get_static_lib().extract_all_objects(recursive: true)
+)
+meson.override_dependency('imsg', libimsg_dep)
+meson.override_dependency('libimsg', libimsg_dep)
+
 pkgconfig = import('pkgconfig')
 pkgconfig.generate(libimsg, version: meson.project_version(), name: 'libimsg', description: 'Unofficial OpenBSD imsg port', libraries: libimsg)
 
